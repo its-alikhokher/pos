@@ -387,21 +387,47 @@ export const useInvoiceDataStore = defineStore("invoiceData", {
             };
           }
         } else {
-          const sendObj = {
-            doctype: "POS Invoice",
-            name: invoiceNo,
-            print_format: this.print_format,
-          };
-          this.call
-            .post("ury.ury.api.ury_print.print_pos_page", sendObj)
-            .then((result) => {
-              this.notification.createNotification("Print Successful");
-              window.location.reload();
+  const printHTML = {
+    doc: "POS Invoice",
+    name: invoiceNo,
+    print_format: this.print_format,
+    _lang: "en",
+  };
+  const result = await this.call.get(
+    "frappe.www.printview.get_html_and_style",
+    printHTML
+  );
 
-              return result.message;
-            })
-            .catch((error) => console.error(error));
-        }
+  if (!result?.message?.html) {
+    this.isPrinting = false;
+    return this.alert.createAlert(
+      "Message",
+      "Unable to load print preview.",
+      "OK"
+    );
+  }
+
+  // Open in new tab and trigger browser's print
+  const printWindow = window.open("", "_blank");
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print Invoice</title>
+        <style>${result.message.style}</style>
+      </head>
+      <body>
+        ${result.message.html}
+        <script>
+          window.onload = function() {
+            window.print();
+          }
+        </script>
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+}
+
       } catch (e) {
         if (e?.custom) {
           this.isPrinting = false;
