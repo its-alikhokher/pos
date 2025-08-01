@@ -112,7 +112,7 @@
     <input
       class="comments mt-3 block w-full rounded-md border bg-gray-50 p-2.5 text-sm text-gray-900 md:w-3/5 lg:w-2/5"
       :value="
-        this.menu.grand_total || this.table.grandTotal || invoiceData.grandTotal
+        this.menu.grandTotal || this.table.grandTotal || invoiceData.grandTotal
       "
       readonly
     />
