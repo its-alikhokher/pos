@@ -5,15 +5,9 @@
     id="tab"
   > 
   
-    <div
-      class="mx-auto grid h-full max-w-lg font-medium"
-      :class="[
-        {
-          'grid-cols-4': !auth.cashier,
-          'grid-cols-5': auth.cashier,
-        },
-      ]"
-    >
+  <div class="mx-auto grid h-full px-6 max-w-screen-md font-medium grid-cols-5">
+
+
       <router-link
         to="/Table"
         class="group inline-flex flex-col items-center justify-center border-x border-gray-200 px-5 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
@@ -157,22 +151,22 @@
       </router-link>
       <router-link
         to="/recentOrder"
-        v-if="this.auth.cashier"
         class="group inline-flex flex-col items-center justify-center border-x border-gray-200 px-5 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
-       
+        @click="!this.auth.cashier && this.tabClick.checkActiveTable()"
+
       >
         <svg
-          class="h-5 w-5 group-hover:text-blue-600 dark:text-gray-400 dark:group-hover:text-blue-500"
+          aria-hidden="true"
           :class="[
             {
               'text-gray-500': this.tabClick.currentTab !== '/recentOrder',
               'text-blue-600': this.tabClick.currentTab === '/recentOrder',
             },
           ]"
+          class="h-5 w-5 group-hover:text-blue-600 dark:text-gray-400 dark:group-hover:text-blue-500"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
         >
           <path
             d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-3 15H4.828a1 1 0 0 1 0-2h6.238a1 1 0 0 1 0 2Zm0-4H4.828a1 1 0 0 1 0-2h6.238a1 1 0 1 1 0 2Z"
