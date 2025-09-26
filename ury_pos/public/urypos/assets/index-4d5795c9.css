@@ -4868,7 +4868,8 @@ input:checked+.toggle-bg {
     }
 
     .lg\:w-44 {
-        width: 4rem !important
+        width: 60px !important;
+
     }
 
     .lg\:w-96 {
