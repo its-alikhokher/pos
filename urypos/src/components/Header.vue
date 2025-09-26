@@ -10,7 +10,7 @@
       >
         <div v-if="this.tabClick.currentTab === '/Table' || this.auth.cashier">
           <a href="/urypos/Table">
-            <img :src="imagePath" alt="Flowbite logo" class="w-32 lg:w-44" />
+            <img style="width: 60px !important;" :src="imagePath" alt="Flowbite logo" class="w-32 lg:w-44" />
           </a>
         </div>
         <div
